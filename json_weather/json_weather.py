@@ -1,21 +1,21 @@
-import reqests
+import requests
 
-serv_api = " https://openweathermap.org/current"
+serv_api = "https://api.openweathermap.org/data/2.5/weather"
 
 def get_info(city, api):
-    parametrs =
-    {
-        "": city,
-        "": api,
-        "": "metric",
-        "": "ru"
+    parametrs ={
+        "q": city,
+        "appid": api,
+        "units": "metric",
+        "lang": "ru"
     }
-    response = reqests.get(serv_api, params = parametrs)
-    if response.status.code == 200:
+    response = requests.get(serv_api, params = parametrs)
+    if response.status_code == 200:
         data= response.json()
-        print(f"Погода в {data['']}: {data['']}, {data['']}")
+        #print(data)
+        print(f"Погода в {data['name']}: {data['weather'][0]['description']},{data['main']['temp']}°")
 
 if __name__ == "__main__":
-    api = input()
+    api = '746c9ab9cf6b08ea270ed1a4c906841c'
     city = input()
-    get_weather(city,api)
+    get_info(city,api)
